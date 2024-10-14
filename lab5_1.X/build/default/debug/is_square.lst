@@ -1,0 +1,110 @@
+
+
+Microchip MPLAB XC8 Assembler V2.45 build 20230818022343 
+                                                                                                           Wed Oct 18 01:16:46 2023
+
+
+     1                           	processor	18F4520
+     2                           	pagewidth 132
+     3                           	opt	flic
+     4                           	psect	udata_acs,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     5                           	psect	udata_bank0,global,class=BANK0,space=1,delta=1,lowdata,noexec
+     6                           	psect	udata_bank1,global,class=BANK1,space=1,delta=1,lowdata,noexec
+     7                           	psect	udata_bank2,global,class=BANK2,space=1,delta=1,lowdata,noexec
+     8                           	psect	udata_bank3,global,class=BANK3,space=1,delta=1,lowdata,noexec
+     9                           	psect	udata_bank4,global,class=BANK4,space=1,delta=1,lowdata,noexec
+    10                           	psect	udata_bank5,global,class=BANK5,space=1,delta=1,lowdata,noexec
+    11                           	psect	udata,global,class=RAM,space=1,delta=1,noexec
+    12                           	psect	code,global,reloc=2,class=CODE,delta=1
+    13                           	psect	data,global,reloc=2,class=CONST,delta=1,noexec
+    14                           	psect	edata,global,class=EEDATA,space=3,delta=1,noexec
+    15                           	psect	mytext,local,reloc=2,class=CODE,delta=1
+    16   000000                     
+    17                           	psect	edata
+    18   000000                     stk_offset	set	0
+    19   000000                     auto_size	set	0
+    20                           
+    21                           ; stack_auto defines a symbol /name/_offset which equates to the
+    22                           ; stack offset of the auto object in question
+    23   000000                     
+    24                           ; stack_param defines a symbol /name/_offset which equates to the
+    25                           ; stack offset of the parameter object in question
+    26   000000                     
+    27                           ; alloc_stack adjusts the SP to allocate space for auto objects
+    28                           ; it also links in to the btemp symbol so that can be used
+    29   000000                     
+    30                           ; restore_stack adjusts the SP to remove all auto and parameter
+    31                           ; objects from the stack prior to returning from a function
+    32   000000                     
+    33                           	psect	mytext
+    34   000602                     _is_square:
+    35                           	callstack 0
+    36   000602  6E00               	movwf	0,c	;move the input to 0x00
+    37   000604  0E01               	movlw	1	;use to count for checking
+    38   000606  6E10               	movwf	16,c
+    39   000608                     loop:
+    40   000608  5010               	movf	16,w,c	;move the value of count into wreg
+    41   00060A  0210               	mulwf	16,c	;use to cal the square of the count value
+    42   00060C  CFF3 F020          	movff	prodl,32	;square ans move to 0x20 and compare with the input
+    43   000610  5020               	movf	32,w,c	;move the comparing value into wreg
+    44   000612  2A10               	incf	16,f,c	;increase the count
+    45   000614  6000               	cpfslt	0,c	;comparing the value with input
+    46   000616  D001               	goto	checkequal
+    47   000618  D003               	goto	no_squareans
+    48   00061A                     checkequal:
+    49   00061A  6200               	cpfseq	0,c
+    50   00061C  D7F5               	goto	loop
+    51   00061E  D003               	goto	has_squareans
+    52   000620                     no_squareans:
+    53   000620  0EFF               	movlw	255
+    54   000622  6E01               	movwf	1,c	;ans
+    55   000624  0012               	return	
+    56   000626                     has_squareans:
+    57   000626  0E01               	movlw	1
+    58   000628  6E01               	movwf	1,c	;ans
+    59   00062A  0012               	return	
+    60                           tosu	equ	0xFFF
+    61                           tosh	equ	0xFFE
+    62                           tosl	equ	0xFFD
+    63                           stkptr	equ	0xFFC
+    64                           pclatu	equ	0xFFB
+    65                           pclath	equ	0xFFA
+    66                           pcl	equ	0xFF9
+    67                           tblptru	equ	0xFF8
+    68                           tblptrh	equ	0xFF7
+    69                           tblptrl	equ	0xFF6
+    70                           tablat	equ	0xFF5
+    71                           prodh	equ	0xFF4
+    72                           prodl	equ	0xFF3
+    73                           indf0	equ	0xFEF
+    74                           postinc0	equ	0xFEE
+    75                           postdec0	equ	0xFED
+    76                           preinc0	equ	0xFEC
+    77                           plusw0	equ	0xFEB
+    78                           fsr0h	equ	0xFEA
+    79                           fsr0l	equ	0xFE9
+    80                           wreg	equ	0xFE8
+    81                           indf1	equ	0xFE7
+    82                           postinc1	equ	0xFE6
+    83                           postdec1	equ	0xFE5
+    84                           preinc1	equ	0xFE4
+    85                           plusw1	equ	0xFE3
+    86                           fsr1h	equ	0xFE2
+    87                           fsr1l	equ	0xFE1
+    88                           bsr	equ	0xFE0
+    89                           indf2	equ	0xFDF
+    90                           postinc2	equ	0xFDE
+    91                           postdec2	equ	0xFDD
+    92                           preinc2	equ	0xFDC
+    93                           plusw2	equ	0xFDB
+    94                           fsr2h	equ	0xFDA
+    95                           fsr2l	equ	0xFD9
+    96                           status	equ	0xFD8
+
+
+Microchip Technology PIC18 Macro Assembler V2.45 build 20230818022343 
+Symbol Table                                                                                               Wed Oct 18 01:16:46 2023
+
+                        loop 0608                 has_squareans 0626                         PRODL 0FF3  
+                     isa$std 0001                  no_squareans 0620                    checkequal 061A  
+                  _is_square 0602                     isa$xinst 0000  
