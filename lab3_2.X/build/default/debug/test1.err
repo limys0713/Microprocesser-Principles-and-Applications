@@ -1,0 +1,3 @@
+Warning[205] C:\USERS\USER\MPLABXPROJECTS\LAB3_2.X\TEST1.ASM 1 : Found directive in column 1. (List)
+Warning[207] C:\USERS\USER\MPLABXPROJECTS\LAB3_2.X\TEST1.ASM 29 : Found label after column 1. (overflow)
+Warning[207] C:\USERS\USER\MPLABXPROJECTS\LAB3_2.X\TEST1.ASM 32 : Found label after column 1. (cont)
