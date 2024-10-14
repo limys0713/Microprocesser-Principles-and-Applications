@@ -1,0 +1,5 @@
+Warning[205] C:\USERS\USER\MPLABXPROJECTS\LAB1_2.X\TEST1.ASM 1 : Found directive in column 1. (List)
+Warning[207] C:\USERS\USER\MPLABXPROJECTS\LAB1_2.X\TEST1.ASM 13 : Found label after column 1. (loop)
+Warning[207] C:\USERS\USER\MPLABXPROJECTS\LAB1_2.X\TEST1.ASM 16 : Found label after column 1. (cont)
+Warning[207] C:\USERS\USER\MPLABXPROJECTS\LAB1_2.X\TEST1.ASM 24 : Found label after column 1. (increase)
+Warning[207] C:\USERS\USER\MPLABXPROJECTS\LAB1_2.X\TEST1.ASM 29 : Found label after column 1. (finish)
