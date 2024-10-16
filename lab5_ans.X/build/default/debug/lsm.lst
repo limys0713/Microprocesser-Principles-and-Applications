@@ -1,0 +1,167 @@
+
+
+Microchip MPLAB XC8 Assembler V2.45 build 20230818022343 
+                                                                                                           Thu Oct 19 17:08:42 2023
+
+
+     1                           	processor	18F4520
+     2                           	pagewidth 132
+     3                           	opt	flic
+     4                           	psect	udata_acs,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     5                           	psect	udata_bank0,global,class=BANK0,space=1,delta=1,lowdata,noexec
+     6                           	psect	udata_bank1,global,class=BANK1,space=1,delta=1,lowdata,noexec
+     7                           	psect	udata_bank2,global,class=BANK2,space=1,delta=1,lowdata,noexec
+     8                           	psect	udata_bank3,global,class=BANK3,space=1,delta=1,lowdata,noexec
+     9                           	psect	udata_bank4,global,class=BANK4,space=1,delta=1,lowdata,noexec
+    10                           	psect	udata_bank5,global,class=BANK5,space=1,delta=1,lowdata,noexec
+    11                           	psect	udata,global,class=RAM,space=1,delta=1,noexec
+    12                           	psect	code,global,reloc=2,class=CODE,delta=1
+    13                           	psect	data,global,reloc=2,class=CONST,delta=1,noexec
+    14                           	psect	edata,global,class=EEDATA,space=3,delta=1,noexec
+    15                           	psect	mytext,local,reloc=2,class=CODE,delta=1
+    16   000000                     
+    17                           	psect	edata
+    18   000000                     stk_offset	set	0
+    19   000000                     auto_size	set	0
+    20                           
+    21                           ; stack_auto defines a symbol /name/_offset which equates to the
+    22                           ; stack offset of the auto object in question
+    23   000000                     
+    24                           ; stack_param defines a symbol /name/_offset which equates to the
+    25                           ; stack offset of the parameter object in question
+    26   000000                     
+    27                           ; alloc_stack adjusts the SP to allocate space for auto objects
+    28                           ; it also links in to the btemp symbol so that can be used
+    29   000000                     
+    30                           ; restore_stack adjusts the SP to remove all auto and parameter
+    31                           ; objects from the stack prior to returning from a function
+    32   000000                     
+    33                           	psect	mytext
+    34   000602                     _lcm:
+    35                           	callstack 0
+    36   000602  C001 F010          	movff	1,16	;0x10 (low a), 0x11 (high a)
+    37   000606  C003 F012          	movff	3,18	;0x12 (low b), 0x13 (high b)
+    38   00060A  C001 F030          	movff	1,48
+    39   00060E  C003 F032          	movff	3,50
+    40   000612  0E01               	movlw	1
+    41   000614  6E21               	movwf	33,c
+    42   000616  6E22               	movwf	34,c
+    43   000618                     loop:
+    44   000618  0E00               	movlw	0
+    45   00061A  6E20               	movwf	32,c	;count, use to check how many high bit = 0
+    46                           
+    47                           ;count a:0x21, count b:0x22, use in temporary save:0x24, use to record which count is used now:0x25
+    48                           ;test which one is bigger
+    49                           ;first check if both of their high bit = 0
+    50   00061C  0E00               	movlw	0
+    51   00061E  6211               	cpfseq	17,c	;high a ;skip if = 0
+    52   000620  2A20               	incf	32,f,c
+    53   000622  6213               	cpfseq	19,c	;high b ;skip if = 0
+    54   000624  2A20               	incf	32,f,c
+    55                           
+    56                           ;check if 0x20 = 0
+    57   000626  6220               	cpfseq	32,c
+    58   000628  D004               	goto	cont
+    59   00062A  C010 F011          	movff	16,17	;cuz using high bit to check
+    60   00062E  C012 F013          	movff	18,19
+    61   000632                     cont:
+    62   000632  5011               	movf	17,w,c	;move a to wreg for comparing
+    63   000634  6413               	cpfsgt	19,c	;skip if f>wreg(b>a)
+    64   000636  D001               	goto	a_is_bigger
+    65   000638  D009               	goto	b_is_bigger
+    66   00063A                     a_is_bigger:
+    67                           
+    68                           ;bigger put at 0x30,0x31 ;smaller 0x32, 0x33
+    69   00063A  0E00               	movlw	0
+    70   00063C  6220               	cpfseq	32,c	;test count if = 0, skip
+    71   00063E  D004               	goto	cont1
+    72   000640  0E00               	movlw	0
+    73   000642  6E11               	movwf	17,c
+    74   000644  0E00               	movlw	0
+    75   000646  6E13               	movwf	19,c
+    76   000648                     cont1:
+    77   000648  2A22               	incf	34,f,c
+    78   00064A  D008               	goto	cont2
+    79   00064C                     b_is_bigger:
+    80                           
+    81                           ;bigger put at 0x30,0x31 ;smaller 0x32, 0x33
+    82   00064C  0E00               	movlw	0
+    83   00064E  6220               	cpfseq	32,c
+    84   000650  D004               	goto	cont3
+    85   000652  0E00               	movlw	0
+    86   000654  6E11               	movwf	17,c
+    87   000656  0E00               	movlw	0
+    88   000658  6E13               	movwf	19,c
+    89   00065A                     cont3:
+    90   00065A  2A21               	incf	33,f,c
+    91   00065C                     cont2:
+    92                           
+    93                           ;multiplication
+    94                           ;mul a
+    95   00065C  5030               	movf	48,w,c
+    96   00065E  0221               	mulwf	33,c	;mul
+    97   000660  CFF3 F010          	movff	prodl,16
+    98   000664  CFF4 F011          	movff	prodh,17
+    99                           
+   100                           ;mul b
+   101   000668  5032               	movf	50,w,c
+   102   00066A  0222               	mulwf	34,c	;mul
+   103   00066C  CFF3 F012          	movff	prodl,18
+   104   000670  CFF4 F013          	movff	prodh,19
+   105   000674  5010               	movf	16,w,c
+   106   000676  6212               	cpfseq	18,c
+   107   000678  D7CF               	goto	loop
+   108   00067A  5011               	movf	17,w,c
+   109   00067C  6213               	cpfseq	19,c	;when two ans is equal, then skip
+   110   00067E  D7CC               	goto	loop
+   111                           
+   112                           ;move the ans to 0x01 0x02
+   113   000680  C010 F001          	movff	16,1
+   114   000684  C011 F002          	movff	17,2
+   115   000688  0012               	return	
+   116                           tosu	equ	0xFFF
+   117                           tosh	equ	0xFFE
+   118                           tosl	equ	0xFFD
+   119                           stkptr	equ	0xFFC
+   120                           pclatu	equ	0xFFB
+   121                           pclath	equ	0xFFA
+   122                           pcl	equ	0xFF9
+   123                           tblptru	equ	0xFF8
+   124                           tblptrh	equ	0xFF7
+   125                           tblptrl	equ	0xFF6
+   126                           tablat	equ	0xFF5
+   127                           prodh	equ	0xFF4
+   128                           prodl	equ	0xFF3
+   129                           indf0	equ	0xFEF
+   130                           postinc0	equ	0xFEE
+   131                           postdec0	equ	0xFED
+   132                           preinc0	equ	0xFEC
+   133                           plusw0	equ	0xFEB
+   134                           fsr0h	equ	0xFEA
+   135                           fsr0l	equ	0xFE9
+   136                           wreg	equ	0xFE8
+   137                           indf1	equ	0xFE7
+   138                           postinc1	equ	0xFE6
+   139                           postdec1	equ	0xFE5
+   140                           preinc1	equ	0xFE4
+   141                           plusw1	equ	0xFE3
+   142                           fsr1h	equ	0xFE2
+   143                           fsr1l	equ	0xFE1
+   144                           bsr	equ	0xFE0
+   145                           indf2	equ	0xFDF
+   146                           postinc2	equ	0xFDE
+   147                           postdec2	equ	0xFDD
+   148                           preinc2	equ	0xFDC
+   149                           plusw2	equ	0xFDB
+   150                           fsr2h	equ	0xFDA
+   151                           fsr2l	equ	0xFD9
+   152                           status	equ	0xFD8
+
+
+Microchip Technology PIC18 Macro Assembler V2.45 build 20230818022343 
+Symbol Table                                                                                               Thu Oct 19 17:08:42 2023
+
+                        _lcm 0602                          cont 0632                          loop 0618  
+                       PRODH 0FF4                         PRODL 0FF3                         cont1 0648  
+                       cont2 065C                         cont3 065A                       isa$std 0001  
+                 a_is_bigger 063A                   b_is_bigger 064C                     isa$xinst 0000  
