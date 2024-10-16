@@ -1,0 +1,67 @@
+MPLINK 5.09, LINKER
+Linker Map File - Created Thu Oct 26 15:29:47 2023
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x0000b8
+                   .cinit    romdata   0x0000b8    program   0x000002
+                    dbgP0       code   0x007dc0    program   0x000240
+.config_300001_BUILD/DEFAULT/DEBUG/ADVANCED.O    romdata   0x300001    program   0x000001
+.config_300003_BUILD/DEFAULT/DEBUG/ADVANCED.O    romdata   0x300003    program   0x000001
+.config_300006_BUILD/DEFAULT/DEBUG/ADVANCED.O    romdata   0x300006    program   0x000001
+                    dbgD0      udata   0x0005f4       data   0x00000c
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x0000b9      
+                            0x007dc0    0x007fff      
+                            0x300001    0x300001      
+                            0x300003    0x300003      
+                            0x300006    0x300006      
+            765 out of 33048 program addresses used, program memory utilization is 2%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                  _1LOOP1   0x000022    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _1LOOP2   0x00001e    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _2LOOP1   0x000042    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _2LOOP2   0x00003e    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _3LOOP1   0x000062    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _3LOOP2   0x00005e    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _4LOOP1   0x000082    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _4LOOP2   0x00007e    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _5LOOP1   0x0000a0    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _5LOOP2   0x00009c    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+            check_process   0x000012    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                      int   0x000000    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                     loop   0x000012    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                    start   0x000000    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                      int   0x000000    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                    start   0x000000    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+            check_process   0x000012    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                     loop   0x000012    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _1LOOP2   0x00001e    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _1LOOP1   0x000022    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _2LOOP2   0x00003e    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _2LOOP1   0x000042    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _3LOOP2   0x00005e    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _3LOOP1   0x000062    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _4LOOP2   0x00007e    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _4LOOP1   0x000082    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _5LOOP2   0x00009c    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+                  _5LOOP1   0x0000a0    program     static C:\Users\User\MPLABXProjects\lab6_2.X\advanced.asm
+
+
