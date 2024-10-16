@@ -1,0 +1,6 @@
+Warning[203] C:\USERS\USER\MPLABXPROJECTS\LAB7.X\BONUS.ASM 60 : Found opcode in column 1. (goto)
+Warning[207] C:\USERS\USER\MPLABXPROJECTS\LAB7.X\BONUS.ASM 72 : Found label after column 1. (cont)
+Warning[207] C:\USERS\USER\MPLABXPROJECTS\LAB7.X\BONUS.ASM 92 : Found label after column 1. (contISR1)
+Warning[207] C:\USERS\USER\MPLABXPROJECTS\LAB7.X\BONUS.ASM 99 : Found label after column 1. (contISR2)
+Warning[202] C:\USERS\USER\MPLABXPROJECTS\LAB7.X\BONUS.ASM 191 : Argument out of range.  Least significant bits used.
+Warning[205] C:\USERS\USER\MPLABXPROJECTS\LAB7.X\BONUS.ASM 204 : Found directive in column 1. (end)
